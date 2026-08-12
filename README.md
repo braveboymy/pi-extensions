@@ -47,7 +47,7 @@ pi install git:https://github.com/braveboymy/pi-extensions
 ### 方式三：npm
 
 ```bash
-pi install npm:@braveboymy/pi-extensions
+pi install npm:@jours_757/pi-extensions
 ```
 
 ## 前提条件
