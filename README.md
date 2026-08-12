@@ -1,4 +1,16 @@
-# Vision Bridge
+# Pi Extensions
+
+Pi 扩展合集（一个包，`pi install` 一次装全部）。
+
+## 扩展列表
+
+| 扩展 | 说明 |
+|---|---|
+| [vision-bridge](#vision-bridge-识图桥接) | 让不支持图片的主模型也能看图 |
+
+---
+
+# Vision Bridge 识图桥接
 
 Pi 扩展：让**不支持图片的主模型**（如 deepseek-v4-flash）也能"看图"。
 
@@ -16,10 +28,10 @@ Pi 扩展：让**不支持图片的主模型**（如 deepseek-v4-flash）也能"
 
 ### 方式一：手动（最快）
 
-把 `extensions/vision-bridge/index.ts` 复制到：
+把 `extensions/` 整个目录复制到：
 
 ```
-~/.pi/agent/extensions/vision-bridge/index.ts
+~/.pi/agent/extensions/   # vision-bridge/index.ts 等子目录会被自动发现
 ```
 
 pi 内执行 `/reload` 生效。
@@ -27,13 +39,13 @@ pi 内执行 `/reload` 生效。
 ### 方式二：git
 
 ```bash
-pi install git:https://github.com/<you>/vision-bridge
+pi install git:https://github.com/<you>/pi-extensions
 ```
 
 ### 方式三：npm
 
 ```bash
-pi install npm:vision-bridge
+pi install npm:pi-extensions
 ```
 
 ## 前提条件
@@ -70,6 +82,16 @@ const VISION_TIMEOUT_MS = 120_000;       // 单次识别超时
 ## 安全
 
 扩展拥有完整系统权限，**安装第三方包前请审查源码**。本扩展逻辑简单：仅读取图片 → 调用你配置的视觉模型 → 返回文字。不含任何密钥（API key 通过 pi 自身 auth 机制运行时解析），不发送图片到第三方服务（只发给你自己配置的视觉模型端点）。
+
+## 新增扩展
+
+在 `extensions/` 下新建子目录放 `index.ts`（或直接放 `*.ts` 文件）即可，重新 push 后对方 `pi update` 生效：
+
+```
+extensions/
+├── vision-bridge/index.ts   ← 现有
+└── your-new-ext/index.ts    ← 以后新增
+```
 
 ## 运行时文件
 
