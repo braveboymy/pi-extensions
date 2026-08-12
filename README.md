@@ -1,6 +1,9 @@
 # Pi Extensions
 
-Pi 扩展合集（一个包，`pi install` 一次装全部）。
+[![npm version](https://img.shields.io/npm/v/@jours_757/pi-extensions?label=npm)](https://www.npmjs.com/package/@jours_757/pi-extensions)
+[![License](https://img.shields.io/npm/l/@jours_757/pi-extensions)](https://www.npmjs.com/package/@jours_757/pi-extensions)
+
+Pi 扩展合集（一个包，`pi install` 一次装全部），已发布至 npm。
 
 ![demo](demo.png)
 
@@ -16,7 +19,7 @@ Pi 扩展合集（一个包，`pi install` 一次装全部）。
 
 Pi 扩展：让**不支持图片的主模型**（如 deepseek-v4-flash）也能"看图"。
 
-粘贴图片或遇到图片任务时，自动把图片交给**视觉模型**（gpt-5.6-luna / kimi-k2.6 等候选列表，自动选择可用者）识别，把**文字描述**交回主模型继续处理。主模型全程不换，图片本体不进主上下文（省 token）。
+粘贴图片或遇到图片任务时，自动把图片交给**视觉模型**（mimo-v2.5 → gpt-5.6-luna → kimi-k2.6 候选列表，自动选择可用者）识别，把**文字描述**交回主模型继续处理。主模型全程不换，图片本体不进主上下文（省 token）。
 
 ## 功能
 
@@ -28,7 +31,21 @@ Pi 扩展：让**不支持图片的主模型**（如 deepseek-v4-flash）也能"
 
 ## 安装
 
-### 方式一：手动（最快）
+### 方式一：npm（推荐，已发布）
+
+```bash
+pi install npm:@jours_757/pi-extensions
+```
+
+包主页：https://www.npmjs.com/package/@jours_757/pi-extensions
+
+### 方式二：git
+
+```bash
+pi install git:https://github.com/braveboymy/pi-extensions
+```
+
+### 方式三：手动（最快）
 
 把 `extensions/` 整个目录复制到：
 
@@ -37,18 +54,6 @@ Pi 扩展：让**不支持图片的主模型**（如 deepseek-v4-flash）也能"
 ```
 
 pi 内执行 `/reload` 生效。
-
-### 方式二：git
-
-```bash
-pi install git:https://github.com/braveboymy/pi-extensions
-```
-
-### 方式三：npm
-
-```bash
-pi install npm:@jours_757/pi-extensions
-```
 
 ## 前提条件
 
@@ -62,9 +67,9 @@ pi install npm:@jours_757/pi-extensions
 ```ts
 const VISION_PROVIDER = "opencode-go";   // 视觉模型所在 provider
 const VISION_MODEL_CANDIDATES = [        // 候选视觉模型，按顺序尝试
+  "mimo-v2.5",
   "gpt-5.6-luna",
   "kimi-k2.6",
-  // ...
 ];
 const VISION_MAX_TOKENS = 16_000;        // 单次识别最大输出 token
 const VISION_TIMEOUT_MS = 120_000;       // 单次识别超时
