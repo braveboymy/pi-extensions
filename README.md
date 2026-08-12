@@ -41,13 +41,13 @@ pi 内执行 `/reload` 生效。
 ### 方式二：git
 
 ```bash
-pi install git:https://github.com/<you>/pi-extensions
+pi install git:https://github.com/braveboymy/pi-extensions
 ```
 
 ### 方式三：npm
 
 ```bash
-pi install npm:pi-extensions
+pi install npm:@braveboymy/pi-extensions
 ```
 
 ## 前提条件
