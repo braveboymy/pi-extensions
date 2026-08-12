@@ -1,0 +1,39 @@
+name: Publish to npm
+
+# 触发：推送 v* 标签时自动发布（npm version patch && git push --tags）
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          registry-url: "https://registry.npmjs.org"
+
+      # 校验：tag 版本必须与 package.json 版本一致（提前失败，避免发布报错）
+      - name: Verify version matches tag
+        run: |
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
+          PKG_VERSION=$(node -p "require('./package.json').version")
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "❌ tag v${TAG_VERSION} 与 package.json 版本 ${PKG_VERSION} 不一致"
+            echo "请先执行: npm version ${TAG_VERSION} 或 npm version patch"
+            exit 1
+          fi
+          echo "✅ 版本一致: ${PKG_VERSION}"
+
+      # 发布前预览 tarball 内容
+      - name: Preview tarball
+        run: npm pack --dry-run
+
+      - name: Publish to npm
+        run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
