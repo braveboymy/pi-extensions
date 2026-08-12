@@ -1,10 +1,22 @@
 {
   "name": "@jours_757/pi-extensions",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Pi 扩展合集：当前包含 vision-bridge（识图桥接——自动把图片识别交给视觉模型，文字描述交回文本主模型）。",
-  "keywords": ["pi-package", "extensions", "vision", "image", "multimodal", "ocr", "deepseek"],
+  "keywords": [
+    "pi-package",
+    "extensions",
+    "vision",
+    "image",
+    "multimodal",
+    "ocr",
+    "deepseek"
+  ],
   "license": "MIT",
-  "files": ["extensions", "demo.png", "README.md"],
+  "files": [
+    "extensions",
+    "demo.png",
+    "README.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/braveboymy/pi-extensions.git"
@@ -14,7 +26,9 @@
     "access": "public"
   },
   "pi": {
-    "extensions": ["./extensions"],
+    "extensions": [
+      "./extensions"
+    ],
     "image": "demo.png"
   },
   "peerDependencies": {
