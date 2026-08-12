@@ -1,0 +1,4 @@
+node_modules/
+extensions/vision-bridge/images/
+extensions/vision-bridge/.state.json
+*.tgz

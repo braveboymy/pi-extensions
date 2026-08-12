@@ -1,0 +1,14 @@
+{
+  "name": "vision-bridge",
+  "version": "1.0.0",
+  "description": "Pi extension: automatically route image recognition to a vision model (gpt-5.6-luna / kimi-k2.6 ...) and hand the text description back to a text-only main model (e.g. deepseek-v4-flash).",
+  "keywords": ["pi-package", "vision", "image", "multimodal", "ocr", "deepseek"],
+  "license": "MIT",
+  "pi": {
+    "extensions": ["./extensions"]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "typebox": "*"
+  }
+}
