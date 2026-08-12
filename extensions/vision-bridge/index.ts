@@ -24,13 +24,9 @@ const VISION_PROVIDER = "opencode-go";
  *  gpt-5.6-luna 在某些地区会被上游 403（This model is not available in your region），
  *  此时自动回退到 kimi-k2.6 等。 */
 const VISION_MODEL_CANDIDATES = [
+  "mimo-v2.5",
   "gpt-5.6-luna",
   "kimi-k2.6",
-  "kimi-k3",
-  "qwen3.8-max",
-  "qwen3.6-plus",
-  "minimax-m3",
-  "mimo-v2.5",
 ];
 const VISION_TIMEOUT_MS = 120_000;
 /** 识别模型单次响应的最大输出 token（防大图/多图描述截断） */
