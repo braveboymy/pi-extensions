@@ -5,7 +5,8 @@
   "keywords": ["pi-package", "extensions", "vision", "image", "multimodal", "ocr", "deepseek"],
   "license": "MIT",
   "pi": {
-    "extensions": ["./extensions"]
+    "extensions": ["./extensions"],
+    "image": "demo.png"
   },
   "peerDependencies": {
     "@earendil-works/pi-coding-agent": "*",
