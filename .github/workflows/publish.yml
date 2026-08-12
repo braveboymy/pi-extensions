@@ -1,10 +1,11 @@
 name: Publish to npm
 
-# 触发：推送 v* 标签时自动发布（npm version patch && git push --tags）
+# 触发：推送 v* 标签自动发布；也可在 Actions 页手动运行（Run workflow）
 on:
   push:
     tags:
       - "v*"
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -16,6 +17,26 @@ jobs:
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
+
+      # 认证诊断：token 为空或无效时给出明确提示（而不是 ENEEDAUTH 裸错）
+      - name: Verify npm auth
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          if [ -z "$NODE_AUTH_TOKEN" ]; then
+            echo "❌ NODE_AUTH_TOKEN 为空"
+            echo "   请检查仓库 Settings → Secrets and variables → Actions"
+            echo "   是否存在名称完全一致的 Secret：NPM_TOKEN（大小写敏感）"
+            exit 1
+          fi
+          echo "✅ NODE_AUTH_TOKEN 已配置（${#NODE_AUTH_TOKEN} 字符）"
+          WHOAMI=$(npm whoami 2>&1)
+          if [ $? -ne 0 ]; then
+            echo "❌ npm whoami 失败：$WHOAMI"
+            echo "   可能原因：token 已过期 / 被重新生成作废 / 值包含多余空格换行"
+            exit 1
+          fi
+          echo "✅ npm 账号：$WHOAMI"
 
       # 校验：tag 版本必须与 package.json 版本一致（提前失败，避免发布报错）
       - name: Verify version matches tag
